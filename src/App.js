@@ -4,6 +4,7 @@ import Create from './Create'
 import BlogDetails from './BlogDetails'
 import NotFound from './NotFound'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import domain from './Domain'
 
 function App() {
   return (
@@ -12,13 +13,13 @@ function App() {
       <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path="/">
+            <Route exact path={domain+'/'}>
               <Home />
             </Route>
-            <Route exact path="/create">
+            <Route exact path={domain+'/create'}>
               <Create />
             </Route>
-            <Route exact path="/blogs/:blogId">
+            <Route exact path={domain+'/blogs/:blogId'}>
               <BlogDetails />
             </Route>
             <Route path="*">

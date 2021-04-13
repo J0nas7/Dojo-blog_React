@@ -4,17 +4,17 @@ import { useHistory } from "react-router-dom";
 const Create = () => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
-    const [author, setAuthor] = useState('bjarnil')
+    const [userId, setUserId] = useState('2')
     const [isPending, setIsPending] = useState(false)
     const history = useHistory()
 
     const handleCreate = (e) => {
         e.preventDefault()
-        const blog = { title, body, author }
+        const blog = { title, body, userId }
 
         setIsPending(true)
 
-        const postUrl = 'http://localhost:8000/blogs'
+        const postUrl = 'https://jsonplaceholder.typicode.com/posts'
         fetch(postUrl, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -23,7 +23,7 @@ const Create = () => {
             .then(() => {
                 console.log("new blog added")
                 setIsPending(false)
-                history.push('/')
+                history.push('./')
             })
     }
 
@@ -46,17 +46,19 @@ const Create = () => {
                 ></textarea>
                 <label>Blog author:</label>
                 <select
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
+                    value={userId}
+                    onChange={(e) => setUserId(e.target.value)}
                 >
-                    <option value="eigol">Eigol</option>
-                    <option value="bjarnil">Bjarnil</option>
+                    <option value="1">Bjarnil</option>
+                    <option value="2">Eigol</option>
+                    <option value="3">Mario</option>
+                    <option value="4">Luigi</option>
                 </select>
                 {!isPending && <button>Add Blog</button>}
                 {isPending && <button disabled>Adding blog...</button>}
                 <p>{ title }</p>
                 <p>{ body }</p>
-                <p>{ author }</p>
+                <p>{ userId }</p>
             </form>
         </div>
     );
